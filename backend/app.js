@@ -1,0 +1,16 @@
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const userRoutes = require("./routes/userRoutes");
+app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.use("/api/user", userRoutes);
+
+module.exports = app;
