@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8501;
 connectDB()
   .then(() => {
     console.log("Connected to MongoDB");
-    server.listen(3000, () => {
+    server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   })
