@@ -8,7 +8,7 @@ exports.createUser = async ({ firstName, lastName, email, password }) => {
     const existingUser = await userModel.findOne({ email });
 
     if (existingUser) {
-      throw new Error("User already exists");
+    throw new Error("User already exists");
     }
 
     const user = await userModel.create({
@@ -19,6 +19,22 @@ exports.createUser = async ({ firstName, lastName, email, password }) => {
       email,
       password,
     });
+    return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+exports.authLogin = async ({ email, password }) => {
+  try {
+    const user = await userModel.findOne({ email }).select("+password");
+    if (!user) {
+      throw new Error("Invalid email or password");
+    }
+    const isPasswordMatch = await user.comparePassword(password);
+    if (!isPasswordMatch) {
+      throw new Error("Invalid email or password");
+    }
     return user;
   } catch (error) {
     throw new Error(error.message);
