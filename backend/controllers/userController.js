@@ -33,7 +33,32 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     const user = await authLogin({ email, password });
     const jwtToken = await user.generateJWT();
-    res.status(200).json({ user, jwtToken });
+    res
+      .cookie("token", jwtToken, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
+      .status(200)
+      .json({ user, jwtToken });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+exports.profile = async (req, res) => {
+  try {
+    const user = req.user;
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+exports.logout = async (req, res) => {
+  try {
+    res
+      .clearCookie("token")
+      .status(200)
+      .json({ message: "Logged out successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
