@@ -2,7 +2,7 @@ const userModel = require("../models/user");
 const jwt = require("jsonwebtoken");
 const BlacklistToken = require("../models/blacklisttoken");
 exports.isLoggedIn = async (req, res, next) => {
-  const token = req.cookies.token || req.headers.authorization.split(" ")[1];
+  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (token) {
     try {
