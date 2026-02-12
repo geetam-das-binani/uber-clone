@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
+const captainRoutes = require("./routes/captainRoutes");
 app.use(
   cors({
     origin: "*",
@@ -18,5 +19,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRoutes);
+app.use("/api/captain", captainRoutes);
 
 module.exports = app;
