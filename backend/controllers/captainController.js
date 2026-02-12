@@ -1,3 +1,4 @@
+
 const { createCaptain, authLogin } = require("../services/captainService");
 const { validationResult } = require("express-validator");
 const BlacklistToken = require("../models/blacklisttoken");
@@ -11,6 +12,8 @@ exports.register = async (req, res) => {
       fullName: { firstName, lastName },
       email,
       password,
+      vehicle
+     
     } = req.body;
 
     const captain = await createCaptain({
@@ -18,6 +21,7 @@ exports.register = async (req, res) => {
       lastName,
       email,
       password,
+      vehicle,
     });
     const jwtToken = await captain.generateJWT();
     res.status(201).json({ captain, jwtToken });
