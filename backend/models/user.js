@@ -52,7 +52,7 @@ userSchema.methods.generateJWT = function () {
     _id: user._id,
   };
   const options = {
-    expiresIn: "11h",
+    expiresIn: "24h",
   };
   return jwt.sign(payload, process.env.JWT_SECRET, options);
 };
