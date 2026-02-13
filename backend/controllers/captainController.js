@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
 };
 exports.profile = async (req, res) => {
   try {
-    const captain = req.user;
+    const captain = req.captain;
     res.status(200).json({ captain });
   } catch (err) {
     res.status(500).json({ error: err.message });

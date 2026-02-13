@@ -7,7 +7,12 @@ exports.createCaptain = async ({
   vehicle,
 }) => {
   try {
-    if (!firstName || !email || !password) {
+    if (
+      !firstName ||
+      !email ||
+      !password ||
+      Object.keys(vehicle).length === 0
+    ) {
       throw new Error("Please provide all the required fields");
     }
 

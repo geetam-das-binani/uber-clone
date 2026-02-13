@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const captainController = require("../controllers/captainController");
-const { isLoggedIn } = require("../middleware/authMiddleware");
+const { isLoggedIn } = require("../middleware/captainMiddleware");
 
 router.post(
   "/register",
