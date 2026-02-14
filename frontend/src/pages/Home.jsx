@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div>
-      <div className="bg-[url(https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=768/height=768/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy9iOGMzOWRlMC02ZTEzLTQ4NWItYmE0NS02NjUxMTE3MGM2MmEuanBn)] bg-cover h-screen bg-center w-full pt-8 bg-red-400 flex justify-between flex-col">
+      <div className="bg-[url(https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=768/height=768/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy9iOGMzOWRlMC02ZTEzLTQ4NWItYmE0NS02NjUxMTE3MGM2MmEuanBn)] bg-cover h-screen bg-center w-full pt-8  flex justify-between flex-col">
         <img
           className="w-16 ml-8"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
