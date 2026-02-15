@@ -1,29 +1,57 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
-
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useUserContext } from "../context/userContext";
 const UserSignup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [userData, setuserData] = useState({});
 
+  const navigate = useNavigate();
+  const { setUser } = useUserContext();
 
-  
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const newUser = {
+        fullName: {
+          firstName: firstname,
+          lastName: lastname,
+        },
+        email,
+        password,
+      };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setuserData({
-      email,
-      password,
-      firstname,
-      lastname,
-    });
-    setEmail("");
-    setPassword("");
-    setFirstname("");
-    setLastname("");
+      const url = `${import.meta.env.VITE_BASE_URL}/api/user/register`;
+      const response = await axios.post(url, newUser, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+
+      if (response.status === 201) {
+        const data = response.data;
+        console.log(data.user);
+        setUser({
+          email: data.user.email,
+          fullName: {
+            firstName: data.user.fullName.firstName,
+            lastName: data.user.fullName.lastName,
+          },
+        });
+
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setEmail("");
+      setPassword("");
+      setFirstname("");
+      setLastname("");
+    }
   };
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
@@ -84,9 +112,9 @@ const UserSignup = () => {
       </div>
 
       <div>
-      <p className="text-xs text-center leading-tight">
-        By proceeding, you agree to our Terms of Service and Privacy Policy.
-      </p>
+        <p className="text-xs text-center leading-tight">
+          By proceeding, you agree to our Terms of Service and Privacy Policy.
+        </p>
       </div>
     </div>
   );

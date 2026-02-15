@@ -6,7 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const captainRoutes = require("./routes/captainRoutes");
 app.use(
   cors({
-    origin: "*",
+    origin: true,
     credentials: true,
   }),
 );

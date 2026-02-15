@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
+const IndexPage = lazy(() => import("./pages/Index.jsx"));
 const HomePage = lazy(() => import("./pages/Home.jsx"));
 const UserLoginPage = lazy(() => import("./pages/UserLogin.jsx"));
 const UserSignUpPage = lazy(() => import("./pages/UserSignup.jsx"));
@@ -11,7 +12,8 @@ const App = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<UserLoginPage />} />
         <Route path="/signup" element={<UserSignUpPage />} />
         <Route path="/captain-login" element={<CaptainLoginPage />} />
