@@ -1,20 +1,54 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCaptainContext } from "../context/captainContext";
+import axios from "axios";
 
 const CaptainLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captainData, setCaptainData] = useState({});
+  const { setCaptain } = useCaptainContext();
+    const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+      const url = `${import.meta.env.VITE_BASE_URL}/api/captain/login`;
+      const response = await axios.post(
+        url,
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        },
+      );
+      console.log(response);
 
-    setCaptainData({
-      email,
-      password,
-    });
-    setEmail("");
-    setPassword("");
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data.captain);
+      setCaptain({
+          email: data.captain.email,
+          fullName: {
+            firstName: data.captain.fullName.firstName,
+            lastName: data.captain.fullName.lastName,
+          },
+          vehicle: data.captain.vehicle,
+        });
+        
+
+        navigate("/captain-home");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setEmail("");
+      setPassword("");
+    }
   };
   return (
     <div className="p-7 h-screen flex flex-col justify-between">

@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
     const captain = await authLogin({ email, password });
     const jwtToken = await captain.generateJWT();
     res
-      .cookie("token", jwtToken, {
+      .cookie("captainToken", jwtToken, {
         httpOnly: true,
         sameSite: "none",
         secure: true,
