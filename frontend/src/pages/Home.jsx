@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
+import LocationSearchPanel from "../components/LocationSearchPanel";
 
 const Home = () => {
   const [pickup, setpickup] = useState("");
@@ -9,6 +10,7 @@ const Home = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
+  const panelVehicleRef = useRef(null); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,21 +20,35 @@ const Home = () => {
     if (panelOpen) {
       gsap.to(panelRef.current, {
         height: "70%",
+        opacity: 1,
+        padding: 20,
+
       });
       gsap.to(panelCloseRef.current, {
         opacity: 1,
       });
+      gsap.to(panelVehicleRef.current, {
+        opacity: 1,
+        position:"fixed",
+      });
     } else {
       gsap.to(panelRef.current, {
         height: "0%",
+        opacity: 0,
+        padding: 0,
       });
       gsap.to(panelCloseRef.current, {
         opacity: 0,
       });
+      gsap.to(panelVehicleRef.current, {
+        opacity: 0,
+        position:"unset",
+
+      });
     }
   }, [panelOpen]);
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen overflow-hidden">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
         alt="uberlogo"
@@ -76,7 +92,37 @@ const Home = () => {
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-red-500 h-0"></div>
+        <div ref={panelRef} className="h-0 opacity-0 bg-white">
+          <LocationSearchPanel />
+        </div>
+      </div>
+
+      <div ref={panelVehicleRef} className="bottom-0 opacity-0 z-10 px-3 py-6 bg-white w-full">
+        <h3 className="text-2xl font-semibold mb-5"> Choose a Vehicle Type</h3>
+        <div className="flex border-2 border-black rounded-xl items-center p-3 justify-between w-full mb-2">
+          <img
+            src="https://th.bing.com/th/id/OIP.2SyVm_Yz4l2O0Nz_upaCFgHaF7?w=126&h=108&c=7&qlt=90&bgcl=a29f76&r=0&o=6&dpr=1.3&pid=13.1"
+            alt="car image"
+            className="h-20"
+          />
+          <div className="w-1/2">
+            <h4 className="font-medium text-base">
+              UberGo{" "}
+              <span>
+                <i className="ri-user-3-fill"></i>
+              </span>
+              4
+            </h4>
+            <h5 className="font-medium text-sm">
+              2 mins away · Arrives 3:45 PM
+            </h5>
+            <p className="font-normal text-xs text-gray-600">
+              Affordable, compact rides
+            </p>
+          </div>
+          <h2 className="text-xl font-semibold">₹193.20</h2>
+        </div>
+        
       </div>
     </div>
   );
