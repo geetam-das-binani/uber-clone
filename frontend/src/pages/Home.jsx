@@ -105,7 +105,7 @@ const Home = () => {
             alt="car image"
             className="h-20"
           />
-          <div className="w-1/2">
+          <div className="w-1/2 ml-2">
             <h4 className="font-medium text-base">
               UberGo{" "}
               <span>
