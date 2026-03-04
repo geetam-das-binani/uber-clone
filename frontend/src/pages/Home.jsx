@@ -122,7 +122,52 @@ const Home = () => {
           </div>
           <h2 className="text-xl font-semibold">₹193.20</h2>
         </div>
-        
+         <div className="flex border-2 border-black rounded-xl items-center p-3 justify-between w-full mb-2">
+          <img
+            src="https://th.bing.com/th/id/OIP.eQB0gi41q925wUMFN6QieQHaHk?w=176&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+            alt="motorcycle"
+            className="h-20 bg-transparent"
+          />
+          <div className="w-1/2 ml-2">
+            <h4 className="font-medium text-base">
+              Moto{" "}
+              <span>
+                <i className="ri-user-3-fill"></i>
+              </span>
+              1
+            </h4>
+            <h5 className="font-medium text-sm">
+              5 mins away · Arrives 9:45 AM
+            </h5>
+            <p className="font-normal text-xs text-gray-600">
+              Affordable, motorcycle rides
+            </p>
+          </div>
+          <h2 className="text-xl font-semibold">₹65</h2>
+        </div>
+          <div className="flex border-2 border-black rounded-xl items-center p-3 justify-between w-full mb-2">
+          <img
+            src="https://th.bing.com/th/id/OIP.h989F5_2QghpWh2kea_NkQHaHE?w=149&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+            alt="auto"
+            className="h-20 bg-transparent"
+          />
+          <div className="w-1/2 ml-2">
+            <h4 className="font-medium text-base">
+              Auto{" "}
+              <span>
+                <i className="ri-user-3-fill"></i>
+              </span>
+              1
+            </h4>
+            <h5 className="font-medium text-sm">
+              10 mins away · Arrives 3.20 PM
+            </h5>
+            <p className="font-normal text-xs text-gray-600">
+              Affordable, auto rides
+            </p>
+          </div>
+          <h2 className="text-xl font-semibold">₹118.60</h2>
+        </div>
       </div>
     </div>
   );
