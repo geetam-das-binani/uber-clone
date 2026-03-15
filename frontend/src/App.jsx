@@ -20,6 +20,7 @@ const CaptainLoginPage = lazy(() => import("./pages/CaptainLogin.jsx"));
 const CaptainSignUpPage = lazy(() => import("./pages/CaptainSignup.jsx"));
 const UserLogoutPage = lazy(() => import("./pages/UserLogout.jsx"));
 const CaptainLogoutPage = lazy(() => import("./pages/CaptainLogout.jsx"));
+const Riding = lazy(() => import("./pages/Riding.jsx"));
 
 const App = () => {
   const { setUser, setLoading } = useUserContext();
@@ -102,6 +103,14 @@ const App = () => {
           }
         />
         <Route path="/login" element={<UserLoginPage />} />
+        <Route
+          path="/riding"
+          element={
+            <UserProtectedWrapper>
+              <Riding />
+            </UserProtectedWrapper>
+          }
+        />
         <Route path="/signup" element={<UserSignUpPage />} />
         <Route path="/captain-login" element={<CaptainLoginPage />} />
         <Route path="/captain-signup" element={<CaptainSignUpPage />} />
