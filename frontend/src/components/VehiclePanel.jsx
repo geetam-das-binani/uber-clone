@@ -1,7 +1,7 @@
 const VehiclePanel = ({ setVehiclePanel, setconfirmRidePanel }) => {
   return (
     <>
-      <h5 className="p-3 text-center text-2xl">
+      <h5 className="p-1 text-center text-2xl">
         <i
           onClick={() => setVehiclePanel(false)}
           className="ri-arrow-down-line"

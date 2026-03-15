@@ -5,6 +5,8 @@ import "remixicon/fonts/remixicon.css";
 import LocationSearchPanel from "../components/LocationSearchPanel";
 import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
+import LookingForDriver from "../components/LookingForDriver";
+import WaitingForDriver from "../components/WaitingForDriver";
 
 const Home = () => {
   const [pickup, setpickup] = useState("");
@@ -14,8 +16,12 @@ const Home = () => {
   const panelCloseRef = useRef(null);
   const vehiclePanelRef = useRef(null);
   const confirmRidePanelRef = useRef(null);
+  const vehicleFoundRef = useRef(null);
+  const waitingForDriverRef = useRef(null);
   const [vehiclePanel, setVehiclePanel] = useState(false);
   const [confirmRidePanel, setconfirmRidePanel] = useState(false);
+  const [vehicleFound, setVehicleFound] = useState(false);
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,6 +81,38 @@ const Home = () => {
     }
   }, [confirmRidePanel]);
 
+  useGSAP(() => {
+    if (vehicleFound) {
+      gsap.to(vehicleFoundRef.current, {
+        transform: "translateY(0%)",
+        opacity: 1,
+        duration: 0.5,
+      });
+    } else {
+      gsap.to(vehicleFoundRef.current, {
+        transform: "translateY(100%)",
+        opacity: 0,
+        duration: 0.5,
+      });
+    }
+  }, [vehicleFound]);
+
+  useGSAP(() => {
+    if (waitingForDriver) {
+      gsap.to(waitingForDriverRef.current, {
+        transform: "translateY(0%)",
+        opacity: 1,
+        duration: 0.5,
+      });
+    } else {
+      gsap.to(waitingForDriverRef.current, {
+        transform: "translateY(100%)",
+        opacity: 0,
+        duration: 0.5,
+      });
+    }
+  }, [waitingForDriver]);
+
   return (
     <div className="relative h-screen overflow-hidden">
       <img
@@ -130,7 +168,7 @@ const Home = () => {
 
       <div
         ref={vehiclePanelRef}
-        className="bottom-0 fixed  translate-y-full opacity-0 z-10 px-3 py-8 bg-white w-full"
+        className="bottom-0 fixed  translate-y-full opacity-0 z-10 px-3 py-6 pt-12 bg-white w-full"
       >
         <VehiclePanel
           setconfirmRidePanel={setconfirmRidePanel}
@@ -140,9 +178,37 @@ const Home = () => {
 
       <div
         ref={confirmRidePanelRef}
-        className="bottom-0 fixed  translate-y-full opacity-0 z-10 px-3 py-8 bg-white w-full"
+        className="bottom-0 fixed  translate-y-full opacity-0 z-10 px-3 py-6 pt-12 bg-white w-full shadow-lg"
       >
-        <ConfirmRide setVehiclePanel={setVehiclePanel} setconfirmRidePanel={setconfirmRidePanel} />
+        <ConfirmRide
+          setVehiclePanel={setVehiclePanel}
+          setconfirmRidePanel={setconfirmRidePanel}
+          setVehicleFound={setVehicleFound}
+        />
+      </div>
+
+      <div
+        ref={vehicleFoundRef}
+        className="bottom-0 fixed  translate-y-full opacity-0 z-10 px-3 py-6 pt-12 bg-white w-full shadow-lg"
+      >
+        <LookingForDriver
+          setVehiclePanel={setVehiclePanel}
+          setconfirmRidePanel={setconfirmRidePanel}
+          setVehicleFound={setVehicleFound}
+        />
+      </div>
+
+      <div
+        ref={waitingForDriverRef}
+        className="bottom-0 fixed   translate-y-full opacity-0   z-10 px-3 py-6 pt-12 bg-white w-full shadow-lg"
+      >
+        <WaitingForDriver
+          setVehiclePanel={setVehiclePanel}
+          setconfirmRidePanel={setconfirmRidePanel}
+          setVehicleFound={setVehicleFound}
+          setWaitingForDriver={setWaitingForDriver}
+          waitingForDriver={waitingForDriver}
+        />
       </div>
     </div>
   );
